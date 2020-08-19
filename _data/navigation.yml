@@ -2,6 +2,6 @@ main:
   - title: "Home"
     url: /
   - title: "Directory"
-    url: /directory/
+    url: /directory.html
   - title: "About"
     url: /indo/
