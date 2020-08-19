@@ -1,7 +1,7 @@
 main:
   - title: "Home"
-    url: /optheory/
+    url: 
   - title: "Directory"
-    url: /optheory/directory.html
+    url: directory.html
   - title: "About"
-    url: /optheory/about.html
+    url: about.html
