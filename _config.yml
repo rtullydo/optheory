@@ -20,7 +20,7 @@ title                    : "The Operator Theory Information Network"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "OPT-IN"
-description              : "An amazing website."
+description              : ""
 url                      : https://rtullydo.github.com/optheory
 baseurl                  : 
 repository               : rtullydo/optheory
@@ -95,8 +95,8 @@ analytics:
 author:
   name             : "OPT-IN"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Somewhere"
+  bio              : ""
+  location         : ""
   email            :
   links:
     - label: "Email"
