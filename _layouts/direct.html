@@ -1,0 +1,133 @@
+---
+---
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="{{ site.locale | slice: 0,2 | default: "en" }}" class="no-js">
+  <head>
+    {% include head.html %}
+    {% include head/custom.html %}
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--BOOTSTRAP MAIN STYLES -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!--FONTAWESOME MAIN STYLE -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--CUSTOM STYLE -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]--> 
+
+    
+
+	<meta charset="utf-8">
+
+	<!-- jQuery -->
+	<script src="assets/js/jquery-3.5.1.min.js"></script>
+
+	<!-- Tablesorter: required -->
+	<link rel="stylesheet" href="css/theme.blue.css">
+	<script src="assets/js/jquery.tablesorter.js"></script>
+	<script src="assets/js/jquery.tablesorter.widgets.js"></script>
+
+	<!-- Tablesorter: optional -->
+	<link rel="stylesheet" href="assets/addons/pager/jquery.tablesorter.pager.css">
+	<style>
+	.left { float: left; }
+	.right {
+		float: right;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		-ms-user-select: none;
+	}
+	.pager .prev, .pager .next, .pagecount { cursor: pointer; }
+	.pager a {
+		text-decoration: none;
+		color: black;
+	}
+	.pager a.current {
+		color: #0080ff;
+	}
+	</style>
+	<script src="assets/addons/pager/jquery.tablesorter.pager.js"></script>
+	<script src="assets/addons/pager-custom-controls.js"></script>
+
+	<script id="js">$(function(){
+
+	// initialize custom pager script BEFORE initializing tablesorter/tablesorter pager
+	// custom pager looks like this:
+	// 1 | 2 … 5 | 6 | 7 … 99 | 100
+	//   _       _   _        _     adjacentSpacer
+	//       _           _          distanceSpacer
+	// _____               ________ ends (2 default)
+	//         _________            aroundCurrent (1 default)
+
+	var $table = $('table'),
+		$pager = $('.pager');
+
+	$.tablesorter.customPagerControls({
+		table          : $table,                   // point at correct table (string or jQuery object)
+		pager          : $pager,                   // pager wrapper (string or jQuery object)
+		pageSize       : '.left a',                // container for page sizes
+		currentPage    : '.right a',               // container for page selectors
+		ends           : 2,                        // number of pages to show of either end
+		aroundCurrent  : 1,                        // number of pages surrounding the current page
+		link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
+		currentClass   : 'current',                // current page class name
+		adjacentSpacer : '<span> | </span>',       // spacer for page numbers next to each other
+		distanceSpacer : '<span> &#133; <span>',   // spacer for page numbers away from each other (ellipsis = &amp;#133;)
+		addKeyboard    : true,                     // use left,right,up,down,pageUp,pageDown,home, or end to change current page
+		pageKeyStep    : 10                        // page step to use for pageUp and pageDown
+	});
+
+	// initialize tablesorter & pager
+	$table
+		.tablesorter({
+			theme: 'blue',
+			widgets: ['zebra', 'columns', 'filter']	
+		})
+		.tablesorterPager({
+			// target the pager markup - see the HTML block below
+			container: $pager,
+			size: 10,
+			output: 'Showing: {startRow} to {endRow} ({filteredRows})'
+		});
+
+});
+</script>
+  </head>
+
+  <body class="layout--{{ page.layout | default: layout.layout }}{% if page.classes or layout.classes %}{{ page.classes | default: layout.classes | join: ' ' | prepend: ' ' }}{% endif %}">
+    {% include_cached skip-links.html %}
+    {% include_cached browser-upgrade.html %}
+    {% include_cached masthead.html %}
+
+    <div class="initial-content">
+      {{ content }}
+    </div>
+
+    {% if site.search == true %}
+      <div class="search-content">
+        {% include_cached search/search_form.html %}
+      </div>
+    {% endif %}
+
+    <div id="footer" class="page__footer">
+      <footer>
+        {% include footer/custom.html %}
+        {% include_cached footer.html %}
+      </footer>
+    </div>
+
+    {% include scripts.html %}
+
+  </body>
+</html>
