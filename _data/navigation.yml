@@ -1,0 +1,7 @@
+main:
+	-title: "Home"
+	 url: /
+	-title: "Directory"
+	 url: /directory.html
+	-title: "About"
+	 url: /about.html
