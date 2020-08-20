@@ -662,7 +662,9 @@ name: Directory
 	</tbody>
 </table>
 <script>
-
+var filtersConfig = {
+	alternate_rows: true,
+	col_1: 'select'};
 
 var tf = new TableFilter(document.querySelector('.my-table'), {
     base_path: 'https://unpkg.com/browse/tablefilter@0.7.2/dist/tablefilter/'
