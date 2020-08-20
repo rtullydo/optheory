@@ -663,7 +663,24 @@ name: Directory
 </table>
 <script>
 var tf = new TableFilter('peeps',{
-	base_path: 'assets/js/tablefilter/'
+	base_path: 'assets/js/tablefilter/',
+	alternate_rows: true,
+	col_4: 'select',
+	col_5: 'select',
+	paging: {
+		results_per_page: ['Records: ', [10, 20, 50, 100]]
+	},
+	state: {
+		types: ['local storage'],
+		filters: true,
+		page_number: true,
+		page_length: true,
+		sort: true
+	},
+	rows_counter: true
+	}
+
+
 });
 tf.init();
 </script>
