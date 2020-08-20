@@ -265,6 +265,10 @@ compress_html:
   ignore:
     envs: development
 
+head_scripts: 
+  - /assets/iframeResizer.min.js
+  - /assets/iframeResizer.contentWindow.min.js
+
 
 # Defaults
 defaults:
