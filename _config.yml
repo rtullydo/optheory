@@ -266,9 +266,7 @@ compress_html:
     envs: development
 
 head_scripts: 
-  - /assets/iframeResizer.min.js
-  - /assets/iframeResizer.contentWindow.min.js
-  - https://unpkg.com/browse/tablefilter@0.7.2/dist/tablefilter/tablefilter.js
+  - /assets//tablefilter/tablefilter.js
 
 
 # Defaults
