@@ -663,11 +663,10 @@ name: Directory
 </table>
 <script>
 var filtersConfig = {
+	basepath: 'assets/tablefilter'
 	alternate_rows: true,
 	col_1: 'select'};
 
-var tf = new TableFilter('peeps', filtersConfig), {
-    base_path: 'assets/tablefilter/'
-};
+var tf = new TableFilter('peeps', filtersConfig);
 tf.init();
 </script>
