@@ -664,7 +664,6 @@ name: Directory
 <script>
 var tf = new TableFilter('peeps',{
 	base_path: 'assets/js/tablefilter/',
-	alternate_rows: true,
 	col_4: 'select',
 	col_5: 'select',
 	paging: {
@@ -675,9 +674,11 @@ var tf = new TableFilter('peeps',{
 		filters: true,
 		page_number: true,
 		page_length: true,
-		sort: true,
-		btn_reset: true
 	},
+	alternate_rows: true,
+	btn_reset: true,
+	status_bar:true,
+	loader: true
 	rows_counter: true
 	});
 tf.init();
