@@ -4,7 +4,7 @@ classes: wide
 name: Directory
 ---
 
-<table width=100%>
+<table width=100% id='peeps'>
 <thead>
 		 <tr>
 			<th>First Name </th>
@@ -666,7 +666,7 @@ var filtersConfig = {
 	alternate_rows: true,
 	col_1: 'select'};
 
-var tf = new TableFilter(document.querySelector('.my-table'), {
+var tf = new TableFilter('peeps', filtersConfig), {
     base_path: 'https://unpkg.com/browse/tablefilter@0.7.2/dist/tablefilter/'
 });
 tf.init();
