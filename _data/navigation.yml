@@ -3,3 +3,5 @@ main:
     url: /
   - title: "Directory"
     url: /direct/
+  - title: "Curriculum"
+    url: /curriculum/
