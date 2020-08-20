@@ -266,7 +266,7 @@ compress_html:
     envs: development
 
 head_scripts: 
-  - /assets/js/tablefilter/tablefilter.js
+  - assets/js/tablefilter/tablefilter.js
 
 
 # Defaults

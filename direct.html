@@ -662,11 +662,8 @@ name: Directory
 	</tbody>
 </table>
 <script>
-var filtersConfig = {
-	basepath: '/assets/js/tablefilter/'
-	alternate_rows: true,
-	col_1: 'select'};
-
-var tf = new TableFilter('peeps', filtersConfig);
+var tf = new TableFilter('peeps',{
+	base_path: 'assets/js/tablefilter/'
+});
 tf.init();
 </script>
