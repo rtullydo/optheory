@@ -40,77 +40,9 @@
 	<!-- jQuery -->
 	<script src="assets/js/jquery-3.5.1.min.js"></script>
 
-	<!-- Tablesorter: required -->
-	<link rel="stylesheet" href="assets/css/theme.blue.css">
-	<script src="assets/js/jquery.tablesorter.js"></script>
-	<script src="assets/js/jquery.tablesorter.widgets.js"></script>
+	
+   <script src="assets/js/tablefilter/tablefilter.js"></script>
 
-	<!-- Tablesorter: optional -->
-	<link rel="stylesheet" href="assets/addons/pager/jquery.tablesorter.pager.css">
-	<style>
-	.left { float: left; }
-	.right {
-		float: right;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-khtml-user-select: none;
-		-ms-user-select: none;
-	}
-	.pager .prev, .pager .next, .pagecount { cursor: pointer; }
-	.pager a {
-		text-decoration: none;
-		color: black;
-	}
-	.pager a.current {
-		color: #0080ff;
-	}
-	</style>
-	<script src="assets/addons/pager/jquery.tablesorter.pager.js"></script>
-	<script src="assets/addons/pager-custom-controls.js"></script>
-
-	<script id="js">$(function(){
-
-	// initialize custom pager script BEFORE initializing tablesorter/tablesorter pager
-	// custom pager looks like this:
-	// 1 | 2 … 5 | 6 | 7 … 99 | 100
-	//   _       _   _        _     adjacentSpacer
-	//       _           _          distanceSpacer
-	// _____               ________ ends (2 default)
-	//         _________            aroundCurrent (1 default)
-
-	var $table = $('table'),
-		$pager = $('.pager');
-
-	$.tablesorter.customPagerControls({
-		table          : $table,                   // point at correct table (string or jQuery object)
-		pager          : $pager,                   // pager wrapper (string or jQuery object)
-		pageSize       : '.left a',                // container for page sizes
-		currentPage    : '.right a',               // container for page selectors
-		ends           : 2,                        // number of pages to show of either end
-		aroundCurrent  : 1,                        // number of pages surrounding the current page
-		link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
-		currentClass   : 'current',                // current page class name
-		adjacentSpacer : '<span> | </span>',       // spacer for page numbers next to each other
-		distanceSpacer : '<span> &#133; <span>',   // spacer for page numbers away from each other (ellipsis = &amp;#133;)
-		addKeyboard    : true,                     // use left,right,up,down,pageUp,pageDown,home, or end to change current page
-		pageKeyStep    : 10                        // page step to use for pageUp and pageDown
-	});
-
-	// initialize tablesorter & pager
-	$table
-		.tablesorter({
-			theme: 'blue',
-			widgets: ['zebra', 'columns', 'filter']	
-		})
-		.tablesorterPager({
-			// target the pager markup - see the HTML block below
-			container: $pager,
-			size: 10,
-			output: 'Showing: {startRow} to {endRow} ({filteredRows})'
-		});
-
-});
-</script>
 </head>
 
 <body>
@@ -145,62 +77,26 @@
 </div>
 
 <div id="main">
-<table class="tablesorter">
+<table id='peeps'>
 
 	<thead>
 		 <tr>
-			<th class="sorter-false" data-placeholder="Search"><nobr>First Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </nobr></th>
-			<th data-placeholder="Search"><nobr>Last Name &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; </nobr></th>
-			<th data-placeholder="Search"><nobr>Affiliation &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-													&nbsp; &nbsp; &nbsp; &nbsp;</nobr></th>
-			<th class="filter-select filter-exact" data-placeholder="All"><nobr>Country &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-																				&nbsp; &nbsp; </nobr></th>
-			<th class="filter-select filter-exact" data-placeholder="All"><nobr>Status &nbsp;</nobr></th>
-			<th class="filter-select filter-exact" data-placeholder="All">Gender</th>
-			<th class="filter-select filter-exact" data-placeholder="All"><nobr>arXiv &nbsp; &nbsp; </nobr></th>
-			<th class="filter-select filter-exact" data-placeholder="All"><nobr>Genealogy &nbsp; &nbsp; &nbsp; </nobr></th>
-			<th data-placeholder="Search"><nobr>MR ID &nbsp; &nbsp; </nobr></th>
-			<th data-placeholder="Search"><nobr>Institution Type &nbsp; &nbsp; </nobr></th>
-			<th data-placeholder="Search"><nobr>Year of PhD &nbsp; &nbsp; </nobr></th>
+<thead>
+       <tr>
+         <th>First Name </th>
+         <th>Last Name</th>
+         <th>Affiliation</th>
+         <th>Country</th>
+         <th>Status </th>
+         <th>Gender</th>
+         <th>arXiv</th>
+         <th> Genealogy </th>
+         <th>MR ID </th>
+         <th>Institution Type</th>
+         <th>Year of PhD </th>
    </tr>
 </thead>
-	<tfoot>
-		<tr>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Affiliation</th>
-			<th>Country</th>
-			<th>Region</th>
-			<th>Status</th>
-			<th>Gender</th>
-			<th>Homepage</th>
-			<th>arXiv</th>
-			<th>Genealogy</th>
-			<th>MR ID</th>
-		</tr>
-		<tr>
-			<td colspan="11">
-				<div class="pager"> <span class="left">
-					Results per page:
-					<a href="#">10</a> |
-					<a href="#">25</a> |
-					<a href="#">50</a> |
-					<a href="#">100</a>
-				</span>
-				<span class="right">
-					<span class="prev">
-						<img src="https://mottie.github.com/tablesorter/addons/pager/icons/prev.png" /> Prev&nbsp;
-					</span>
-					<span class="pagecount"></span>
-					&nbsp;<span class="next">Next
-						<img src="https://mottie.github.com/tablesorter/addons/pager/icons/next.png" /> &nbsp;&nbsp;
-					</span>
-				</span>
-				</div>
-			</td>
-		</tr>
-	</tfoot>
+	
 <tbody>
 <tr>
       <td>Ryan</td>
@@ -841,6 +737,47 @@
    </tr>
 	</tbody>
 </table>
+<script>
+var tf = new TableFilter('peeps',{
+   base_path: 'assets/js/tablefilter/',
+   paging: {
+      results_per_page: ['Records: ', [10, 20, 50, 100]]
+   },
+   state: {
+      types: ['local storage'],
+      filters: true,
+      page_number: true,
+      page_length: true,
+   },
+   alternate_rows: true,
+   btn_reset: true,
+   toolbar: true,
+   loader: true,
+   rows_counter: true,
+   status_bar: true,
+
+   themes:[{name: 'skyblue'}],
+
+   col_types: [
+      'string',
+      'string',
+      'string',
+      'string',
+      'string',
+      'string',
+      'string',
+      'string',
+      'string',
+      'string',
+      'number'
+      ],
+
+   col_4: 'select',
+   col_5: 'select',
+   extensions: [{ name: 'sort' }]
+   });
+tf.init();
+</script>
 
 	
 
