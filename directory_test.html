@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- HEAD SECTION -->
+<head>
+
+
+  <meta charset="utf-8">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Operator Theory and Operator Analysis</title>
+    <!--GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--BOOTSTRAP MAIN STYLES -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!--FONTAWESOME MAIN STYLE -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--CUSTOM STYLE -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]--> 
+
+    
+
+	<meta charset="utf-8">
+
+	<!-- jQuery -->
+	<script src="assets/js/jquery-3.5.1.min.js"></script>
+
+	<!-- Tablesorter: required -->
+	<link rel="stylesheet" href="assets/css/theme.blue.css">
+	<script src="assets/js/jquery.tablesorter.js"></script>
+	<script src="assets/js/jquery.tablesorter.widgets.js"></script>
+
+	<!-- Tablesorter: optional -->
+	<link rel="stylesheet" href="assets/addons/pager/jquery.tablesorter.pager.css">
+	<style>
+	.left { float: left; }
+	.right {
+		float: right;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-khtml-user-select: none;
+		-ms-user-select: none;
+	}
+	.pager .prev, .pager .next, .pagecount { cursor: pointer; }
+	.pager a {
+		text-decoration: none;
+		color: black;
+	}
+	.pager a.current {
+		color: #0080ff;
+	}
+	</style>
+	<script src="assets/addons/pager/jquery.tablesorter.pager.js"></script>
+	<script src="assets/addons/pager-custom-controls.js"></script>
+
+	<script id="js">$(function(){
+
+	// initialize custom pager script BEFORE initializing tablesorter/tablesorter pager
+	// custom pager looks like this:
+	// 1 | 2 … 5 | 6 | 7 … 99 | 100
+	//   _       _   _        _     adjacentSpacer
+	//       _           _          distanceSpacer
+	// _____               ________ ends (2 default)
+	//         _________            aroundCurrent (1 default)
+
+	var $table = $('table'),
+		$pager = $('.pager');
+
+	$.tablesorter.customPagerControls({
+		table          : $table,                   // point at correct table (string or jQuery object)
+		pager          : $pager,                   // pager wrapper (string or jQuery object)
+		pageSize       : '.left a',                // container for page sizes
+		currentPage    : '.right a',               // container for page selectors
+		ends           : 2,                        // number of pages to show of either end
+		aroundCurrent  : 1,                        // number of pages surrounding the current page
+		link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
+		currentClass   : 'current',                // current page class name
+		adjacentSpacer : '<span> | </span>',       // spacer for page numbers next to each other
+		distanceSpacer : '<span> &#133; <span>',   // spacer for page numbers away from each other (ellipsis = &amp;#133;)
+		addKeyboard    : true,                     // use left,right,up,down,pageUp,pageDown,home, or end to change current page
+		pageKeyStep    : 10                        // page step to use for pageUp and pageDown
+	});
+
+	// initialize tablesorter & pager
+	$table
+		.tablesorter({
+			theme: 'blue',
+			widgets: ['zebra', 'columns', 'filter']	
+		})
+		.tablesorterPager({
+			// target the pager markup - see the HTML block below
+			container: $pager,
+			size: 10,
+			output: 'Showing: {startRow} to {endRow} ({filteredRows})'
+		});
+
+});
+</script>
+</head>
+
+<body>
+
+<div class="container">
+    </div>
+
+   
+
+<!--<font color="#548BC3">
+                    
+<h2>
+	<i class="fa fa-male fa-2x"></i>
+	<i class="fa fa-female fa-2x"></i>  &nbsp; Directory
+</h2>
+
+</font>-->
+
+
+
+<!--<button type="button" onclick="alert('\nA QUICK DESCRIPTION OF HOW THE SEARCH WORKS: \n\nA string can be typed into open fields, and items can be selected from dropdown menus in the preselected fields.  If multiple fields are selected, the search uses a Boolean AND and displays only those entries satisfying all search criteria.\n\n\n\nMORE DETAILS ON THE SEARCH: \n\nSEARCH BY STRINGS \nIn the columns with open search fields, you can type a string of letters and the search returns all entries with the string in any part of the entry. (e.g., searching *mit* will return *Mitchell* as well as *Smith*.  The search is not case sensitive.\n\nSPACES\nSpaces are treated just as any other character in a string, so if if you type *John Paul* it will only return people whose name contains that exact string and omit entries such as *John-Paul* or *John Allen Paul*.\n\nENGLISH\nIn the spelling of names and places we use only the 26 letters of the English alphabet without diacritical marks (i.e., no umlauts, accents, etc.).  Likewise, names of institutions are written in English (e.g., *University of the Republic of Uruguay* rather than *Universidad de la Republica de Uruguay*.)\n\nABBREVIATIONS\nWe use abbreviations of institutions when the names are especially long, such as IUPUI.\n\nNUMBERS \nEntries containing numbers can be searched by a string (e.g., typing *1234*) or by a range (e.g., typing *>1000* returns all entries that are larger than 1000).  Typing *>0* will return all values that are not empty, which could be useful for finding all people having a MathSciNet Author ID, and hence at least one publication.\n\n\n\nNote that there is a RESET SEARCH VALUES button that allows you to clear all entries with a single click.\n\n')">Guide to Search Functions</button>-->
+
+
+
+<center>
+	<h2>Searchable Directory of Operator Theorists</h2>
+</center>
+<!-- pager -->
+<div class="pager">
+	<span class="pagedisplay"></span>
+
+</div>
+
+<div id="main">
+<table class="tablesorter">
+
+	<thead>
+		 <tr>
+			<th class="sorter-false" data-placeholder="Search"><nobr>First Name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </nobr></th>
+			<th data-placeholder="Search"><nobr>Last Name &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; </nobr></th>
+			<th data-placeholder="Search"><nobr>Affiliation &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+													&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+													&nbsp; &nbsp; &nbsp; &nbsp;</nobr></th>
+			<th class="filter-select filter-exact" data-placeholder="All"><nobr>Country &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+																				&nbsp; &nbsp; </nobr></th>
+			<th class="filter-select filter-exact" data-placeholder="All"><nobr>Status &nbsp;</nobr></th>
+			<th class="filter-select filter-exact" data-placeholder="All">Gender</th>
+			<th class="filter-select filter-exact" data-placeholder="All"><nobr>arXiv &nbsp; &nbsp; </nobr></th>
+			<th class="filter-select filter-exact" data-placeholder="All"><nobr>Genealogy &nbsp; &nbsp; &nbsp; </nobr></th>
+			<th data-placeholder="Search"><nobr>MR ID &nbsp; &nbsp; </nobr></th>
+			<th data-placeholder="Search"><nobr>Institution Type &nbsp; &nbsp; </nobr></th>
+			<th data-placeholder="Search"><nobr>Year of PhD &nbsp; &nbsp; </nobr></th>
+   </tr>
+</thead>
+	<tfoot>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Affiliation</th>
+			<th>Country</th>
+			<th>Region</th>
+			<th>Status</th>
+			<th>Gender</th>
+			<th>Homepage</th>
+			<th>arXiv</th>
+			<th>Genealogy</th>
+			<th>MR ID</th>
+		</tr>
+		<tr>
+			<td colspan="11">
+				<div class="pager"> <span class="left">
+					Results per page:
+					<a href="#">10</a> |
+					<a href="#">25</a> |
+					<a href="#">50</a> |
+					<a href="#">100</a>
+				</span>
+				<span class="right">
+					<span class="prev">
+						<img src="https://mottie.github.com/tablesorter/addons/pager/icons/prev.png" /> Prev&nbsp;
+					</span>
+					<span class="pagecount"></span>
+					&nbsp;<span class="next">Next
+						<img src="https://mottie.github.com/tablesorter/addons/pager/icons/next.png" /> &nbsp;&nbsp;
+					</span>
+				</span>
+				</div>
+			</td>
+		</tr>
+	</tfoot>
+<tbody>
+<tr>
+      <td>Ryan</td>
+      <td>Tully-Doyle</td>
+      <td>Cal Poly, SLO</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Tully-Doyle%2C+R">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td>PUI</td>
+      <td>2015</td>
+   </tr>
+   <tr>
+      <td>Kelly</td>
+      <td>Bickel</td>
+      <td>Bucknell University</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Female</td>
+      <td></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=176312">genealogy</a></td>
+      <td></td>
+      <td>PUI</td>
+      <td>2013</td>
+   </tr>
+   <tr>
+      <td>J. E.</td>
+      <td>Pascoe</td>
+      <td>University of Florida</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Pascoe%2C+J+E">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td>R</td>
+      <td>2015</td>
+   </tr>
+   <tr>
+      <td>Michael</td>
+      <td>Jury</td>
+      <td>University of Florida</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Jury%2C+M+T">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=69209">genealogy</a></td>
+      <td></td>
+      <td>R</td>
+      <td>2002</td>
+   </tr>
+   <tr>
+      <td>Robert</td>
+      <td>Martin</td>
+      <td>University of Manitoba</td>
+      <td>Canada</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Martin%2C+R+T+W">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>2008</td>
+   </tr>
+   <tr>
+      <td>Scott</td>
+      <td>McCullough</td>
+      <td>University of Florida</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=McCullough%2C+S">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=43117">genealogy</a></td>
+      <td></td>
+      <td></td>
+      <td>1987</td>
+   </tr>
+   <tr>
+      <td>Igor</td>
+      <td>Klep</td>
+      <td>Univesrity of Ljubljana</td>
+      <td>Slovenia</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Klep%2C+I">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=61158">genealogy</a></td>
+      <td></td>
+      <td></td>
+      <td>2006</td>
+   </tr>
+   <tr>
+      <td>Mark</td>
+      <td>Mancuso</td>
+      <td>Lafayette College</td>
+      <td>USA</td>
+      <td>VAP</td>
+      <td>Male</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>2020</td>
+   </tr>
+   <tr>
+      <td>Meric</td>
+      <td>Augat</td>
+      <td>Washington University</td>
+      <td>USA</td>
+      <td>Postdoc</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=augat&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=253262">genealogy</a></td>
+      <td></td>
+      <td>R</td>
+      <td>2019</td>
+   </tr>
+   <tr>
+      <td>Merdith</td>
+      <td>Sargent</td>
+      <td>University of Arkansas</td>
+      <td>USA</td>
+      <td>Postdoc</td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Sargent%2C+M">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=234618">genealogy</a></td>
+      <td></td>
+      <td>R</td>
+      <td>2018</td>
+   </tr>
+   <tr>
+      <td>John</td>
+      <td>McCarthy</td>
+      <td>Washington University</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=McCarthy%2C+J+E">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=32503">genealogy</a></td>
+      <td></td>
+      <td>R</td>
+      <td>1989</td>
+   </tr>
+   <tr>
+      <td>Benjamin</td>
+      <td>Passer</td>
+      <td>United States Naval Academy</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Passer%2C+B">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=204055">genealogy</a></td>
+      <td></td>
+      <td>PUI</td>
+      <td>2016</td>
+   </tr>
+   <tr>
+      <td>Benjamin</td>
+      <td>Russo</td>
+      <td>Farmingdale State College, SUNY</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Russo%2C+B+P">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=253261">genealogy</a></td>
+      <td></td>
+      <td>PUI</td>
+      <td>2016</td>
+   </tr>
+   <tr>
+      <td>Edward</td>
+      <td>Timko</td>
+      <td>University of Manitoba</td>
+      <td>USA</td>
+      <td>Postdoc</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Timko%2C+E+J">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=217563">genealogy</a></td>
+      <td></td>
+      <td></td>
+      <td>2017</td>
+   </tr>
+   <tr>
+      <td>Hari</td>
+      <td>Bercovici</td>
+      <td>Indiana University</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Bercovici%2C+H">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=7075">genealogy</a></td>
+      <td></td>
+      <td>R</td>
+      <td>1982</td>
+   </tr>
+   <tr>
+      <td>Michael</td>
+      <td>Hartz</td>
+      <td>Saarland University</td>
+      <td>Germany</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Hartz%2C+M">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=207104">genealogy</a></td>
+      <td></td>
+      <td>R</td>
+      <td>2016</td>
+   </tr>
+   <tr>
+      <td>Kenneth</td>
+      <td>Davidson</td>
+      <td>University of Waterloo</td>
+      <td>Canada</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Davidson%2C+K+R">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=31392">genealogy</a></td>
+      <td></td>
+      <td>R</td>
+      <td>1976</td>
+   </tr>
+   <tr>
+      <td>Mark</td>
+      <td>Stankus</td>
+      <td>Cal Poly, SLO</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Stankus%2C+M">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=39872">genealogy</a></td>
+      <td></td>
+      <td>PUI</td>
+      <td>1993</td>
+   </tr>
+   <tr>
+      <td>Linda</td>
+      <td>Patton</td>
+      <td>Cal Poly, SLO</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/math?searchtype=author&query=Patton%2C+L+J">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=39868">genealogy</a></td>
+      <td></td>
+      <td>PUI</td>
+      <td>1991</td>
+   </tr>
+   <tr>
+      <td>Caixing</td>
+      <td>Gu</td>
+      <td>Cal Poly, SLO</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=gu%2C+caixing&searchtype=all&source=header">arXiV</a></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=2161">genealogy</a></td>
+      <td></td>
+      <td>PUI</td>
+      <td>1994</td>
+   </tr>
+   <tr>
+      <td>Robbins</td>
+      <td>Marian</td>
+      <td>Cal Poly, SLO</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Female</td>
+      <td></td>
+      <td><a href="https://www.genealogy.math.ndsu.nodak.edu/id.php?id=16315">genealogy</a></td>
+      <td></td>
+      <td>PUI</td>
+      <td>1992</td>
+   </tr>
+   <tr>
+      <td>Pamela</td>
+      <td>Gorkin</td>
+      <td>Bucknell University</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?query=gorkin%2C+pamela&searchtype=all&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>George</td>
+      <td>Exner</td>
+      <td>Bucknell University</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=exner%2C+george&searchtype=all&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Nathan</td>
+      <td>Feldman</td>
+      <td>Washington and Lee University</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Feldman%2C+N+S">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Constanze</td>
+      <td>Liaw</td>
+      <td>University of Delaware</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?query=Liaw%2C+Constanze&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>William</td>
+      <td>Ross</td>
+      <td>University of Richmond</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Ross%2C+W+T">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Elodie</td>
+      <td>Pozzi</td>
+      <td>St. Louis University</td>
+      <td>USA</td>
+      <td>Faculty</td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Pozzi%2C+E">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Brittney</td>
+      <td>Miller</td>
+      <td>Coe College</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Brett </td>
+      <td>Wick </td>
+      <td>Washington University in St. Louis</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Wick%2C+B+D">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Katie</td>
+      <td>Quertermous</td>
+      <td>James Madison University</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?searchtype=author&query=Quertermous%2C+K+S">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Rachael</td>
+      <td>Norton</td>
+      <td>Fitchburg University</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?query=Norton%2C+Rachael&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Wing Suet</td>
+      <td>Li</td>
+      <td>Georgia Institute of Technology</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Quanlei</td>
+      <td>Fang</td>
+      <td>Bronx Community College</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?query=fang%2C+quanlei&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Hyun-Kyoung</td>
+      <td>Kwon</td>
+      <td>SUNY University at Albany</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?query=Kwon%2C+Hyun-Kyoung&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Joshua</td>
+      <td>Isralowitz</td>
+      <td>SUNY University at Albany</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=Isralowitz%2C+joshua&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Rongwei</td>
+      <td>Yang</td>
+      <td>SUNY University at Albany</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=Yang%2C+Rongwei&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Kehe </td>
+      <td>Zhu</td>
+      <td>SUNY University at Albany</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=zhu%2C+kehe&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Timothy </td>
+      <td>Ferguson</td>
+      <td>University of Alabama</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=ferguson%2C+timothy&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Gabriel</td>
+      <td>Prajitura</td>
+      <td>SUNY Brockport</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=Prajitura%2C+gabriel&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Ruhan </td>
+      <td>Zhao</td>
+      <td>SUNY Brockport</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=Zhao%2C+Ruhan&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Debendra</td>
+      <td>Banjade</td>
+      <td>Coastal Carolina University</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=Banjade%2C+debendra&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Erin</td>
+      <td>Rizzie</td>
+      <td>University of Connecticut</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Flavia </td>
+      <td>Colonna</td>
+      <td>George Mason University</td>
+      <td>USA</td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?query=Colonna%2C+flavia&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Trevor</td>
+      <td>Richards</td>
+      <td>Monmouth College</td>
+      <td>USA </td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=richards%2C+trevor&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Christopher </td>
+      <td>Hammond </td>
+      <td>Connecticut College</td>
+      <td>USA </td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td><a href="https://arxiv.org/search/?query=hammond%2C+christopher&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Fernanda </td>
+      <td>Botelho</td>
+      <td>University of Memphis</td>
+      <td>USA </td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td><a href="https://arxiv.org/search/?query=Botelho%2C+fernanda&searchtype=author&abstracts=show&order=-announced_date_first&size=50">arXiV</a></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Rebecca</td>
+      <td>Wahl</td>
+      <td>Butler University</td>
+      <td>USA </td>
+      <td>Faculty </td>
+      <td>Female</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>William</td>
+      <td>Johnston</td>
+      <td>Butler University</td>
+      <td>USA </td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+   <tr>
+      <td>Kit</td>
+      <td>Chan</td>
+      <td>Bowling Green State University</td>
+      <td>USA </td>
+      <td>Faculty </td>
+      <td>Male</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+   </tr>
+	</tbody>
+</table>
+
+	
+
+</div>
+
+
+<script src="assets/js/bootstrap.min.js"></script>
+
+</body>
+</html>
